@@ -1,0 +1,98 @@
+                    <!--TITRE-->
+
+<div class=" w-75 w-75 container mt-5 mb-5 pt-5 " >
+    <div class="w-75 container" >
+        <a style="color: white; font-size: 30px;">Les catégories :</a>
+    </div>
+</div>
+
+                    <!--CATEGORIES-->
+<div class=" pt-5 d-flex" >
+    <figure class="figure"  id="PVC" style="margin-left: 50px;">
+        <img src="assets/pvc.jpg"  title="PVC" class="rounded-circle"  routerLink="/Pvc" width="150" height="150" >
+        <figcaption class="figure-caption pt-3" style="margin-left: 15mm; font-size: 20px; color: white;" >PVC</figcaption>
+    </figure>   
+    <figure class="figure"  id="Peinture" style="margin-left: 45px;">   
+        <img src="assets/peinture.jpg" title="Peinture" class="rounded-circle"  routerLink="/peinture" width="150" height="150" >
+        <figcaption class="figure-caption pt-3" style="margin-left: 12mm; font-size: 20px; color: white">Peinture</figcaption>
+    </figure>
+    <figure class="figure"  id="Menuiserie" style="margin-left: 45px;">   
+        <img src="assets/menuiserie.jpg"  title="Menuiserie" class="rounded-circle"  routerLink="/menuiserie" width="150" height="150" >
+        <figcaption class="figure-caption pt-3" style="margin-left: 9mm; font-size: 20px; color: white">Menuiserie</figcaption>
+    </figure>
+    <figure class="figure"  id="Plomberie" style="margin-left: 45px;">   
+        <img src="assets/plomberie.jpg"  title="Plomberie" class="rounded-circle"  routerLink="/plomberie" width="150" height="150" >
+        <figcaption class="figure-caption pt-3" style="margin-left: 10mm; font-size: 20px; color: white">Plomberie</figcaption>
+    </figure>
+    <figure class="figure"  id="Plomberie" style="margin-left: 45px;">   
+        <img src="assets/elect.jpg"  title="Electricité" class="rounded-circle"  routerLink="/electricité" width="150" height="150" >
+        <figcaption class="figure-caption pt-3" style="margin-left: 10mm; font-size: 20px; color: white">Electricité</figcaption>
+    </figure>
+    <figure class="figure"  id="Autres" style="margin-left: 45px;">   
+        <img src="assets/autres.jpg"  title="Autres"  class="rounded-circle"  routerLink="/autres" width="150" height="150" >
+        <figcaption class="figure-caption pt-3" style="margin-left: 12mm; font-size: 22px; color: white">Autres</figcaption>
+    </figure>
+</div>
+<div class=" w-75 container mt-5 mb-5 pt-5 " style="margin-right:10px" >
+        <a class=" btn mx-3 btn-lg  px-5" (click)="openForm()" style="color: black;" ><span>Ajouter un Article</span></a>
+        <a class="btn mx-3 btn-lg  px-5" (click)="openFormMiseAjour()" style="color: black;"><span>Mise à jour d'un article </span></a> 
+</div>
+
+                    <!--FORMULAIRE Ajout Article-->
+<div class="form-popup" id="myForm">
+    <h1>Nouveau Article</h1>
+    <form class="form-container"  (ngSubmit)="addArticle(formulaire)" #formulaire="ngForm" >
+  
+      <label for="nom"><b>Nom</b></label>
+      <input type="text" placeholder="Enter nom " id="nom" name="nom" ngModel required >
+  
+      <label for="prix_achat"><b>Prix d'achat</b></label>
+      <input type="number"  id="prix_achat" placeholder="0" name="prix_achat" ngModel required>
+
+      <label for="prix_vente"><b>Prix de vente</b></label>
+      <input type="number"  id="prix_vente" placeholder="0" name="prix_vente"ngModel required>
+
+      <label for="quantité"><b>Quantité</b></label>
+      <input type="text" placeholder="Enter quantité" id="quantité" name="quantité" ngModel required>
+
+      <label for="catégorie"><b>Catégorie</b></label>
+      <select id="catégorie" name="catégorie" ngModel required>
+        <option disabled selected> choisir une catégorie</option>
+        <option value="pvc">PVC</option>
+        <option value="peinture">Peinture</option>
+        <option value="plomberie">Plomberie</option>
+        <option value="menuiserie">Menuiserie</option>
+        <option value="Electricité">Electricité</option>
+        <option value="autres">Autres</option>
+      </select>
+      <button type="submit" class="btn  px-5 mt-5" [disabled]="formulaire.invalid">Enregister</button>
+      <button type="button" class="btn  px-5 mt-5" (click)="closeForm()">Fermer</button>
+    </form>
+    
+  </div>
+
+              <!--FORMULAIRE Mise à jour-->
+<div class="form-popup" id="FormMiseAjour">
+    <h1>Mise à jour</h1>
+    <form class="form-container"  (ngSubmit)="enregistrer(f)" #f="ngForm" >
+  
+      <label for="nom"><b>Nom</b></label>
+      <select id="name" (change)="remplissage($event)" ngModel name="nom">
+          <option disabled selected> choisir un article</option>
+          <option *ngFor="let article of articles"  value={{article.nom}} required>{{article.nom}}</option>
+      </select>
+  
+      <label for="prix_achat"><b>Prix d'achat</b></label>
+      <input type="number"  id="prix_achat" placeholder='0' value={{achat}} name="prix_achat" ngModel >
+
+      <label for="prix_vente"><b>Prix de vente</b></label>
+      <input type="number"  id="prix_vente" placeholder='0' value={{vente}} name="prix_vente" ngModel >
+
+      <label for="quantité"><b>Quantité</b></label>
+      <input type="number" placeholder='0' id="stock" value={{stock}} name="quantité" ngModel >
+
+      <button type="submit" class="btn  px-5 mt-5" [disabled]="f.invalid">Enregister</button>
+      <button type="button" class="btn  px-5 mt-5" (click)="closeFormMiseAjour()">Fermer</button>
+    </form>
+    
+  </div>
